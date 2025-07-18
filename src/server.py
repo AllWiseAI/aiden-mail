@@ -19,11 +19,6 @@ class ToolCredential:
 
 mcp = FastMCP(name="Aiden Mail")
 
-@mcp.prompt(name="email_summary", description="You MUST keep the uid of emails in summary for later use.")
-async def email_summary(summary: str) -> str:
-    return summary
-
-
 @mcp.tool(name="send_email", exclude_args=[CREDENTIAL_ARG])
 async def send_email(subject: str, body: str, recipient: str, __credential__: dict = {}) -> str:
     credential = ToolCredential.from_dict(__credential__)
@@ -95,7 +90,7 @@ async def move_email(uid: str, from_folder: str = "INBOX", to_folder: str = "Tra
     )
     return json.dumps(email_service.move_email(uid, from_folder, to_folder))
 
-@mcp.tool(name="mark_as_read", exclude_args=[CREDENTIAL_ARG])
+@mcp.tool(name="mark_email_as_read", exclude_args=[CREDENTIAL_ARG])
 async def mark_as_read(uid: str, __credential__: dict = {}) -> str:
     credential = ToolCredential.from_dict(__credential__)
     email_service = EmailService(
@@ -105,7 +100,7 @@ async def mark_as_read(uid: str, __credential__: dict = {}) -> str:
     )
     return json.dumps(email_service.mark_as_read(uid))
 
-@mcp.tool(name="mark_as_unread", exclude_args=[CREDENTIAL_ARG])
+@mcp.tool(name="mark_email_as_unread", exclude_args=[CREDENTIAL_ARG])
 async def mark_as_unread(uid: str, __credential__: dict = {}) -> str:
     credential = ToolCredential.from_dict(__credential__)
     email_service = EmailService(
@@ -115,8 +110,8 @@ async def mark_as_unread(uid: str, __credential__: dict = {}) -> str:
     )
     return json.dumps(email_service.mark_as_unread(uid))
 
-@mcp.tool(name="get_folders", exclude_args=[CREDENTIAL_ARG])
-async def get_folders(__credential__: dict = {}) -> str:
+@mcp.tool(name="get_email_folders", exclude_args=[CREDENTIAL_ARG])
+async def get_mail_folders(__credential__: dict = {}) -> str:
     credential = ToolCredential.from_dict(__credential__)
     email_service = EmailService(
         provider=credential.service,
