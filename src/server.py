@@ -2,7 +2,7 @@ import json
 from typing import Optional
 from dataclasses import dataclass
 from fastmcp import FastMCP
-from mail_service.mail_service import EmailService
+from .mail_service.mail_service import EmailService
 
 CREDENTIAL_ARG = "__credential__"
 
@@ -136,5 +136,9 @@ async def get_email_count(folder: str = "INBOX", __credential__: dict = {}) -> s
     return json.dumps(email_service.get_email_count(folder))
 
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()
