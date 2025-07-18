@@ -42,9 +42,14 @@ async def list_emails(folder: str = "INBOX", limit: int = 10, __credential__: di
         email_address=credential.account,
         password=credential.token
     )
+    # only return emails uid and subject
+    emails = email_service.list_emails(folder, limit)
     return json.dumps({
-        "emails": email_service.list_emails(folder, limit),
-        "warning": "You MUST keep the uid of each email when you make summary."
+        "emails": [{
+            "uid": email["uid"],
+            "subject": email["subject"],
+            "date": email["date"]
+        } for email in emails]
     })
 
 @mcp.tool(name="search_emails", exclude_args=[CREDENTIAL_ARG])
@@ -55,12 +60,16 @@ async def search_emails(query: Optional[str] = None, from_addr: Optional[str] = 
         email_address=credential.account,
         password=credential.token
     )
+    emails = email_service.search_emails(query, from_addr, to_addr, subject, folder, limit)
     return json.dumps({
-        "emails": email_service.search_emails(query, from_addr, to_addr, subject, folder, limit),
-        "warning": "You MUST keep the uid of each email when you make summary."
+        "emails": [{
+            "uid": email["uid"],
+            "subject": email["subject"],
+            "date": email["date"]
+        } for email in emails]
     })
 
-@mcp.tool(name="get_email_by_uid", exclude_args=[CREDENTIAL_ARG])
+@mcp.tool(name="get_email_by_uid", exclude_args=[CREDENTIAL_ARG], description="Get email details by uid")
 async def get_email_by_uid(uid: str, __credential__: dict = {}) -> str:
     credential = ToolCredential.from_dict(__credential__)
     email_service = EmailService(
