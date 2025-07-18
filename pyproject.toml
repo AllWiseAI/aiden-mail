@@ -1,6 +1,6 @@
 [project]
 name = "aiden-mail"
-version = "0.1.1"
+version = "0.1.2"
 description = "An email MCP server with IMAP and SMTP support"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -10,4 +10,4 @@ dependencies = [
 ]
 
 [project.scripts]
-aiden-mail = "src.server.main"
+aiden-mail = "src.server:main"
