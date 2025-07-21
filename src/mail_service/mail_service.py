@@ -37,6 +37,12 @@ PROVIDER_PRESET = {
         "smtp_server": "smtp.qq.com",
         "imap_port": 993,
         "smtp_port": 587,
+    },
+    "163": {
+        "imap_server": "imap.163.com",
+        "smtp_server": "smtp.163.com",
+        "imap_port": 993,
+        "smtp_port": 465,
     }
 }
 
