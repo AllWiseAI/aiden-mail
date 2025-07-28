@@ -20,12 +20,12 @@ PROVIDER_PRESET = {
         "imap_port": 993,
         "smtp_port": 587,
     },
-    "outlook": {
-        "imap_server": "outlook.office365.com",
-        "smtp_server": "smtp.office365.com",
-        "imap_port": 993,
-        "smtp_port": 587,
-    },
+    # "outlook": {
+    #     "imap_server": "outlook.office365.com",
+    #     "smtp_server": "smtp.office365.com",
+    #     "imap_port": 993,
+    #     "smtp_port": 587,
+    # },
     "icloud": {
         "imap_server": "imap.mail.me.com",
         "smtp_server": "smtp.mail.me.com",
