@@ -63,6 +63,8 @@ class EmailService:
             email_address: Email address
             password: Email password or app-specific password
         """
+        # lowercase the provider
+        provider = provider.lower()
         if provider not in PROVIDER_PRESET:
             raise ValueError(f"Unsupported email service provider: {provider}")
         self.provider = provider
