@@ -312,6 +312,9 @@ class EmailService:
             _, message_numbers = imap.search(None, 'ALL')
             
             email_list = []
+            if len(message_numbers) == 0 or not message_numbers[0]:
+                return email_list
+            
             message_list = message_numbers[0].split()
             
             # Get latest emails
